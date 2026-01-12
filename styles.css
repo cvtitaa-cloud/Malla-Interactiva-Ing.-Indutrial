@@ -1,3 +1,4 @@
+/* ===== BASE ===== */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: #fdf6fb;
@@ -18,6 +19,7 @@ h1 {
   color: #4b4b6a;
 }
 
+/* ===== BOTÓN ===== */
 #reset {
   display: block;
   margin: 0 auto 15px;
@@ -74,6 +76,7 @@ h1 {
   min-height: 55px;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -96,39 +99,3 @@ h1 {
 }
 
 .area-programacion {
-  background-color: #d9f2e6;
-  color: #2f6f55;
-}
-
-.area-economia {
-  background-color: #ffe1c9;
-  color: #8a4b2f;
-}
-
-.area-gestion {
-  background-color: #cfefff;
-  color: #1f5f85;
-}
-
-.area-humanidades {
-  background-color: #f8d7e8;
-  color: #7a3f5c;
-}
-
-/* ===== ESTADOS ===== */
-.ramo.aprobado {
-  filter: brightness(0.85);
-  text-decoration: line-through;
-  color: white;
-}
-
-.ramo.bloqueado {
-  background-color: #e5e5ea !important;
-  color: #9a9a9a !important;
-  cursor: not-allowed;
-}
-
-/* ===== RESALTADO ===== */
-.ramo.destacado {
-  outline: 3px solid #9fd3ff;
-}
