@@ -1,31 +1,50 @@
-const ramos = [
-  { nombre: "Introducción al Cálculo", semestre: 1 },
-  { nombre: "Álgebra", semestre: 1 },
-  { nombre: "Taller de Programación I", semestre: 1 },
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  padding: 20px;
+}
 
-  { nombre: "Cálculo Diferencial e Integral", semestre: 2 },
-  { nombre: "Álgebra Lineal", semestre: 2 },
-  { nombre: "Taller de Programación II", semestre: 2 },
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-  { nombre: "Cálculo Multivariable", semestre: 3 },
-  { nombre: "Probabilidad y Estadística", semestre: 3 }
-];
+.semestre {
+  margin-bottom: 40px;
+}
 
-const malla = document.getElementById("malla");
+.semestre h2 {
+  margin-bottom: 15px;
+}
 
-const semestres = [...new Set(ramos.map(r => r.semestre))];
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
 
-semestres.forEach(semestre => {
-  const contenedor = document.createElement("div");
-  contenedor.innerHTML = `<h2>Semestre ${semestre}</h2>`;
+.ramo {
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  ramos
-    .filter(r => r.semestre === semestre)
-    .forEach(ramo => {
-      const div = document.createElement("div");
-      div.textContent = ramo.nombre;
-      contenedor.appendChild(div);
-    });
+/* Estados */
+.no-aprobado {
+  background-color: #1e90ff;
+  color: white;
+}
 
-  malla.appendChild(contenedor);
-});
+.aprobado {
+  background-color: #2ecc71;
+  color: white;
+  text-decoration: line-through;
+}
+
+.bloqueado {
+  background-color: #bfc5cc;
+  color: #555;
+  cursor: not-allowed;
+}
