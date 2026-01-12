@@ -7,8 +7,30 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   color: #0b3c5d;
+}
+
+#progreso {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #0b3c5d;
+}
+
+#reset {
+  display: block;
+  margin: 0 auto 25px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e74c3c;
+  color: white;
+  cursor: pointer;
+}
+
+#reset:hover {
+  opacity: 0.9;
 }
 
 #malla {
@@ -32,7 +54,6 @@ h1 {
 
 /* ===== RAMOS ===== */
 
-/* Ramo disponible */
 .ramo {
   background-color: #8fd3f4; /* celeste claro */
   color: #0b3c5d;
@@ -55,14 +76,14 @@ h1 {
   transform: scale(1.02);
 }
 
-/* Ramo aprobado */
+/* Aprobado */
 .ramo.aprobado {
-  background-color: #4aa3df; /* celeste más oscuro */
+  background-color: #4aa3df; /* celeste oscuro */
   color: white;
   text-decoration: line-through;
 }
 
-/* Ramo bloqueado */
+/* Bloqueado */
 .ramo.bloqueado {
   background-color: #d5d8dc;
   color: #7b7d7d;
