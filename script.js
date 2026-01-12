@@ -3,63 +3,56 @@ const ramos = [
   { id: "ALG", nombre: "Álgebra", semestre: 1, prerequisitos: [] },
   { id: "PROG1", nombre: "Taller de Programación I", semestre: 1, prerequisitos: [] },
 
-  { id: "CALC2", nombre: "Cálculo Diferencial e Integral", semestre: 2, prerequisitos: ["CALC1"] },
-  { id: "ALG_LIN", nombre: "Álgebra Lineal", semestre: 2, prerequisitos: ["ALG"] },
-  { id: "PROG2", nombre: "Taller de Programación II", semestre: 2, prerequisitos: ["PROG1"] }
+  { id: "CALC2", nombre: "Cálculo I", semestre: 2, prerequisitos: ["CALC1"] },
+  { id: "PROG2", nombre: "Taller de Programación II", semestre: 2, prerequisitos: ["PROG1"] },
+
+  { id: "CALC3", nombre: "Cálculo II", semestre: 3, prerequisitos: ["CALC2"] },
 ];
 
-// Cargar progreso
-let aprobados = JSON.parse(localStorage.getItem("aprobados")) || [];
+const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
-const malla = document.getElementById("malla");
-
-function puedeDesbloquear(ramo) {
-  return ramo.prerequisitos.every(p => aprobados.includes(p));
-}
-
-function toggleRamo(id) {
-  if (aprobados.includes(id)) {
-    aprobados = aprobados.filter(r => r !== id);
-  } else {
-    aprobados.push(id);
-  }
-  localStorage.setItem("aprobados", JSON.stringify(aprobados));
-  renderMalla();
+function puedeTomar(ramo) {
+  return ramo.prerequisitos.every(req => estadoRamos[req]);
 }
 
 function renderMalla() {
-  malla.innerHTML = "";
+  const contenedor = document.getElementById("malla");
+  contenedor.innerHTML = "";
 
   const semestres = [...new Set(ramos.map(r => r.semestre))];
 
-  semestres.forEach(sem => {
-    const cont = document.createElement("div");
-    cont.className = "semestre";
+  semestres.forEach(semestre => {
+    const col = document.createElement("div");
+    col.className = "semestre";
 
-    cont.innerHTML = `<h2>Semestre ${sem}</h2>`;
-    const grid = document.createElement("div");
-    grid.className = "grid";
+    const titulo = document.createElement("h2");
+    titulo.textContent = `Semestre ${semestre}`;
+    col.appendChild(titulo);
 
-    ramos.filter(r => r.semestre === sem).forEach(ramo => {
-      const div = document.createElement("div");
-      div.classList.add("ramo");
+    ramos
+      .filter(r => r.semestre === semestre)
+      .forEach(ramo => {
+        const div = document.createElement("div");
+        div.className = "ramo";
+        div.textContent = ramo.nombre;
 
-      if (aprobados.includes(ramo.id)) {
-        div.classList.add("aprobado");
-        div.onclick = () => toggleRamo(ramo.id);
-      } else if (!puedeDesbloquear(ramo)) {
-        div.classList.add("bloqueado");
-      } else {
-        div.classList.add("no-aprobado");
-        div.onclick = () => toggleRamo(ramo.id);
-      }
+        if (estadoRamos[ramo.id]) {
+          div.classList.add("aprobado");
+        } else if (!puedeTomar(ramo)) {
+          div.classList.add("bloqueado");
+        }
 
-      div.textContent = ramo.nombre;
-      grid.appendChild(div);
-    });
+        div.onclick = () => {
+          if (div.classList.contains("bloqueado")) return;
+          estadoRamos[ramo.id] = !estadoRamos[ramo.id];
+          localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
+          renderMalla();
+        };
 
-    cont.appendChild(grid);
-    malla.appendChild(cont);
+        col.appendChild(div);
+      });
+
+    contenedor.appendChild(col);
   });
 }
 
