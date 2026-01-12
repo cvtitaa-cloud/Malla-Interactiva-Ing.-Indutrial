@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f4f6f9;
+  margin: 0;
   padding: 20px;
 }
 
@@ -9,42 +10,50 @@ h1 {
   margin-bottom: 30px;
 }
 
+#malla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
 .semestre {
-  margin-bottom: 40px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .semestre h2 {
-  margin-bottom: 15px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .ramo {
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Estados */
-.no-aprobado {
   background-color: #1e90ff;
   color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.aprobado {
+.ramo:hover {
+  opacity: 0.9;
+}
+
+.ramo.aprobado {
   background-color: #2ecc71;
-  color: white;
   text-decoration: line-through;
 }
 
-.bloqueado {
-  background-color: #bfc5cc;
-  color: #555;
+.ramo.bloqueado {
+  background-color: #bdc3c7;
   cursor: not-allowed;
 }
