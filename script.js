@@ -1,101 +1,43 @@
 const ramos = [
-  // ===== SEMESTRE 1 =====
-  { id: "MAT1", nombre: "Matemática I", semestre: 1, area: "matematicas", prerequisitos: [] },
+  { id: "CALC1", nombre: "Introducción al Cálculo", semestre: 1, area: "matematicas", prerequisitos: [] },
   { id: "ALG", nombre: "Álgebra", semestre: 1, area: "matematicas", prerequisitos: [] },
-  { id: "PROG1", nombre: "Programación I", semestre: 1, area: "programacion", prerequisitos: [] },
-  { id: "COM", nombre: "Comunicación Oral", semestre: 1, area: "humanidades", prerequisitos: [] },
+  { id: "PROG1", nombre: "Taller de Programación I", semestre: 1, area: "programacion", prerequisitos: [] },
 
-  // ===== SEMESTRE 2 =====
-  { id: "MAT2", nombre: "Matemática II", semestre: 2, area: "matematicas", prerequisitos: ["MAT1"] },
-  { id: "FIS1", nombre: "Física I", semestre: 2, area: "fisica", prerequisitos: ["MAT1"] },
-  { id: "PROG2", nombre: "Programación II", semestre: 2, area: "programacion", prerequisitos: ["PROG1"] },
-  { id: "ETI", nombre: "Ética", semestre: 2, area: "humanidades", prerequisitos: [] },
+  { id: "CALC2", nombre: "Cálculo I", semestre: 2, area: "matematicas", prerequisitos: ["CALC1"] },
+  { id: "FIS1", nombre: "Física I", semestre: 2, area: "fisica", prerequisitos: ["CALC1"] },
 
-  // ===== SEMESTRE 3 =====
-  { id: "MAT3", nombre: "Matemática III", semestre: 3, area: "matematicas", prerequisitos: ["MAT2"] },
-  { id: "FIS2", nombre: "Física II", semestre: 3, area: "fisica", prerequisitos: ["FIS1"] },
-  { id: "EST", nombre: "Estadística", semestre: 3, area: "matematicas", prerequisitos: ["MAT2"] },
-  { id: "ECO", nombre: "Economía", semestre: 3, area: "economia", prerequisitos: [] },
-
-  // ===== SEMESTRE 4 =====
-  { id: "MAT4", nombre: "Matemática IV", semestre: 4, area: "matematicas", prerequisitos: ["MAT3"] },
-  { id: "MICRO", nombre: "Microeconomía", semestre: 4, area: "economia", prerequisitos: ["ECO"] },
-  { id: "CONT", nombre: "Contabilidad", semestre: 4, area: "gestion", prerequisitos: [] },
-  { id: "PROB", nombre: "Probabilidad", semestre: 4, area: "matematicas", prerequisitos: ["EST"] },
-
-  // ===== SEMESTRE 5 =====
-  { id: "IO1", nombre: "Investigación de Operaciones I", semestre: 5, area: "gestion", prerequisitos: ["PROB"] },
-  { id: "MACRO", nombre: "Macroeconomía", semestre: 5, area: "economia", prerequisitos: ["MICRO"] },
-  { id: "FIN1", nombre: "Finanzas I", semestre: 5, area: "economia", prerequisitos: ["CONT"] },
-  { id: "ORG", nombre: "Comportamiento Organizacional", semestre: 5, area: "gestion", prerequisitos: [] },
-
-  // ===== SEMESTRE 6 =====
-  { id: "IO2", nombre: "Investigación de Operaciones II", semestre: 6, area: "gestion", prerequisitos: ["IO1"] },
-  { id: "GEST", nombre: "Gestión de Operaciones", semestre: 6, area: "gestion", prerequisitos: ["IO1"] },
-  { id: "FIN2", nombre: "Finanzas II", semestre: 6, area: "economia", prerequisitos: ["FIN1"] },
-  { id: "DER", nombre: "Derecho para la Empresa", semestre: 6, area: "humanidades", prerequisitos: [] },
-
-  // ===== SEMESTRE 7 =====
-  { id: "LOG", nombre: "Logística", semestre: 7, area: "gestion", prerequisitos: ["GEST"] },
-  { id: "CAL", nombre: "Gestión de Calidad", semestre: 7, area: "gestion", prerequisitos: ["GEST"] },
-  { id: "RRHH", nombre: "Gestión de Personas", semestre: 7, area: "gestion", prerequisitos: ["ORG"] },
-  { id: "EVAL", nombre: "Evaluación de Proyectos", semestre: 7, area: "gestion", prerequisitos: ["FIN2", "MACRO"] },
-
-  // ===== SEMESTRE 8 =====
-  { id: "ESTR", nombre: "Gestión Estratégica", semestre: 8, area: "gestion", prerequisitos: ["LOG", "CAL"] },
-  { id: "SIM", nombre: "Simulación de Sistemas", semestre: 8, area: "gestion", prerequisitos: ["IO2"] },
-  { id: "INNOV", nombre: "Innovación y Emprendimiento", semestre: 8, area: "gestion", prerequisitos: [] },
-
-  // ===== SEMESTRE 9 =====
-  { id: "PROY1", nombre: "Proyecto de Ingeniería I", semestre: 9, area: "gestion", prerequisitos: ["ESTR", "EVAL"] },
-  { id: "ELECT1", nombre: "Electivo Profesional I", semestre: 9, area: "gestion", prerequisitos: [] },
-
-  // ===== SEMESTRE 10 =====
-  { id: "PROY2", nombre: "Proyecto de Ingeniería II", semestre: 10, area: "gestion", prerequisitos: ["PROY1"] },
-  { id: "ELECT2", nombre: "Electivo Profesional II", semestre: 10, area: "gestion", prerequisitos: [] }
+  { id: "CALC3", nombre: "Cálculo II", semestre: 3, area: "matematicas", prerequisitos: ["CALC2"] }
 ];
 
+const malla = document.getElementById("malla");
+const progreso = document.getElementById("progreso");
+
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
-const notasRamos = JSON.parse(localStorage.getItem("notasRamos")) || {};
+const notas = JSON.parse(localStorage.getItem("notas")) || {};
 
-function puedeTomar(ramo) {
-  return ramo.prerequisitos.every(req => estadoRamos[req]);
-}
+/* ================= CONFETTI ================= */
 
-function resaltarDependientes(id) {
-  ramos.filter(r => r.prerequisitos.includes(id))
-    .forEach(r => {
-      const el = document.querySelector(`[data-id="${r.id}"]`);
-      if (el) el.classList.add("destacado");
-    });
-}
+function lanzarConfetti() {
+  const colores = ["#f4a7b9", "#cdb4db", "#a2d2ff", "#bde0fe", "#ffc8dd"];
 
-function limpiarResaltado() {
-  document.querySelectorAll(".destacado")
-    .forEach(e => e.classList.remove("destacado"));
-}
+  for (let i = 0; i < 40; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    document.body.appendChild(confetti);
 
-function renderMalla() {
-  const contenedor = document.getElementById("malla");
-  contenedor.innerHTML = "";
+    const size = Math.random() * 8 + 6;
+    confetti.style.width = size + "px";
+    confetti.style.height = size + "px";
+    confetti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = "-10px";
+    confetti.style.opacity = Math.random();
 
-  const semestres = [...new Set(ramos.map(r => r.semestre))];
+    const duration = Math.random() * 2 + 2;
 
-  semestres.forEach(s => {
-    const col = document.createElement("div");
-    col.className = "semestre";
-
-    const h = document.createElement("h2");
-    h.textContent = `Semestre ${s}`;
-    col.appendChild(h);
-
-    ramos.filter(r => r.semestre === s).forEach(ramo => {
-      const div = document.createElement("div");
-      div.className = `ramo area-${ramo.area}`;
-      div.dataset.id = ramo.id;
-
-      const nombre = document.createElement("div");
-      nombre.textContent = ramo.nombre;
-      div.appendChild(nombre);
-
-      if (estado
+    confetti.animate([
+      { transform: "translateY(0) rotate(0deg)" },
+      { transform: `translateY(${window.innerHeight + 100}px) rotate(720deg)` }
+    ], {
+      duration: duration * 1000,
+      easing: "eas
