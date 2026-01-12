@@ -55,7 +55,7 @@ h1 {
 /* ===== RAMOS ===== */
 
 .ramo {
-  background-color: #8fd3f4; /* celeste claro */
+  background-color: #8fd3f4;
   color: #0b3c5d;
   padding: 10px;
   margin-bottom: 10px;
@@ -69,7 +69,7 @@ h1 {
   align-items: center;
   justify-content: center;
 
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: all 0.2s ease;
 }
 
 .ramo:hover {
@@ -78,7 +78,7 @@ h1 {
 
 /* Aprobado */
 .ramo.aprobado {
-  background-color: #4aa3df; /* celeste oscuro */
+  background-color: #4aa3df;
   color: white;
   text-decoration: line-through;
 }
@@ -90,6 +90,9 @@ h1 {
   cursor: not-allowed;
 }
 
-.ramo.bloqueado:hover {
-  transform: none;
+/* 🔗 Resaltado de ramos dependientes */
+.ramo.destacado {
+  outline: 3px solid #1e90ff;
+  background-color: #bfe9ff;
+  font-weight: bold;
 }
