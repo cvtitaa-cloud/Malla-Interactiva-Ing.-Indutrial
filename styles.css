@@ -7,7 +7,7 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #0b3c5d;
 }
 
@@ -20,7 +20,7 @@ h1 {
 
 #reset {
   display: block;
-  margin: 0 auto 25px;
+  margin: 0 auto 15px;
   padding: 8px 18px;
   border: none;
   border-radius: 6px;
@@ -33,16 +33,26 @@ h1 {
   opacity: 0.9;
 }
 
-#malla {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
+/* ===== CONTENEDOR SCROLL ===== */
+#contenedor-malla {
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
+/* ===== MALLA EN FILA ===== */
+#malla {
+  display: flex;
+  gap: 20px;
+  min-width: max-content;
+}
+
+/* ===== SEMESTRE ===== */
 .semestre {
-  background: #ffffff;
-  border-radius: 8px;
+  background: white;
+  border-radius: 10px;
   padding: 10px;
+  width: 220px;
+  flex-shrink: 0;
 }
 
 .semestre h2 {
@@ -53,7 +63,6 @@ h1 {
 }
 
 /* ===== RAMOS ===== */
-
 .ramo {
   background-color: #8fd3f4;
   color: #0b3c5d;
@@ -73,7 +82,7 @@ h1 {
 }
 
 .ramo:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 /* Aprobado */
@@ -90,7 +99,7 @@ h1 {
   cursor: not-allowed;
 }
 
-/* 🔗 Resaltado de ramos dependientes */
+/* Resaltado de dependientes */
 .ramo.destacado {
   outline: 3px solid #1e90ff;
   background-color: #bfe9ff;
