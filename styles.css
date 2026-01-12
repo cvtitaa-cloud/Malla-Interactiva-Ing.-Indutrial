@@ -1,4 +1,31 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
-}
+const ramos = [
+  { nombre: "Introducción al Cálculo", semestre: 1 },
+  { nombre: "Álgebra", semestre: 1 },
+  { nombre: "Taller de Programación I", semestre: 1 },
+
+  { nombre: "Cálculo Diferencial e Integral", semestre: 2 },
+  { nombre: "Álgebra Lineal", semestre: 2 },
+  { nombre: "Taller de Programación II", semestre: 2 },
+
+  { nombre: "Cálculo Multivariable", semestre: 3 },
+  { nombre: "Probabilidad y Estadística", semestre: 3 }
+];
+
+const malla = document.getElementById("malla");
+
+const semestres = [...new Set(ramos.map(r => r.semestre))];
+
+semestres.forEach(semestre => {
+  const contenedor = document.createElement("div");
+  contenedor.innerHTML = `<h2>Semestre ${semestre}</h2>`;
+
+  ramos
+    .filter(r => r.semestre === semestre)
+    .forEach(ramo => {
+      const div = document.createElement("div");
+      div.textContent = ramo.nombre;
+      contenedor.appendChild(div);
+    });
+
+  malla.appendChild(contenedor);
+});
