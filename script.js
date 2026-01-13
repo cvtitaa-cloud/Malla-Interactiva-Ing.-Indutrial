@@ -1,130 +1,112 @@
 const ramos = [
-  { id: "CALC0", nombre: "Introducción al Cálculo", semestre: 1, area: "matematicas", prerequisitos: [] },
-  { id: "ALG", nombre: "Álgebra", semestre: 1, area: "matematicas", prerequisitos: [] },
-  { id: "PROG1", nombre: "Programación I", semestre: 1, area: "programacion", prerequisitos: [] },
-  { id: "INTROING", nombre: "Introducción a la Ingeniería", semestre: 1, area: "gestion", prerequisitos: [] },
-  { id: "COM1", nombre: "Comunicación Efectiva", semestre: 1, area: "humanidades", prerequisitos: [] },
+  // SEMESTRE 1
+  {id:"CALC1",nombre:"Introducción al Cálculo",semestre:1,area:"mate",pre:[]},
+  {id:"ALG",nombre:"Álgebra",semestre:1,area:"mate",pre:[]},
+  {id:"TALM",nombre:"Taller Aptitudes Lógicas",semestre:1,area:"mate",pre:[]},
+  {id:"PROG1",nombre:"Taller Programación I",semestre:1,area:"programacion",pre:[]},
+  {id:"INTRO",nombre:"Introducción Ing. Industrial",semestre:1,area:"gestion",pre:[]},
 
-  { id: "CALC1", nombre: "Cálculo I", semestre: 2, area: "matematicas", prerequisitos: ["CALC0"] },
-  { id: "FIS1", nombre: "Física I", semestre: 2, area: "fisica", prerequisitos: ["CALC0"] },
-  { id: "PROG2", nombre: "Programación II", semestre: 2, area: "programacion", prerequisitos: ["PROG1"] },
-  { id: "ETICA", nombre: "Ética Profesional", semestre: 2, area: "humanidades", prerequisitos: [] },
+  // SEMESTRE 2
+  {id:"CALC2",nombre:"Cálculo Dif. e Integral",semestre:2,area:"mate",pre:["CALC1"]},
+  {id:"ALGLIN",nombre:"Álgebra Lineal",semestre:2,area:"mate",pre:["ALG"]},
+  {id:"QUIM",nombre:"Química General",semestre:2,area:"fisica",pre:[]},
+  {id:"PROG2",nombre:"Taller Programación II",semestre:2,area:"programacion",pre:["PROG1"]},
+  {id:"ANTRO",nombre:"Antropología",semestre:2,area:"formacion",pre:[]},
 
-  { id: "CALC2", nombre: "Cálculo II", semestre: 3, area: "matematicas", prerequisitos: ["CALC1"] },
-  { id: "FIS2", nombre: "Física II", semestre: 3, area: "fisica", prerequisitos: ["FIS1"] },
-  { id: "EST1", nombre: "Probabilidad y Estadística", semestre: 3, area: "matematicas", prerequisitos: ["CALC1"] },
-  { id: "CONT", nombre: "Contabilidad", semestre: 3, area: "economia", prerequisitos: [] },
+  // SEMESTRE 3
+  {id:"CALC3",nombre:"Cálculo Multivariable",semestre:3,area:"mate",pre:["CALC2"]},
+  {id:"FIS1",nombre:"Física",semestre:3,area:"fisica",pre:["CALC2"]},
+  {id:"BD",nombre:"Bases de Datos",semestre:3,area:"programacion",pre:["PROG2"]},
+  {id:"TDIG",nombre:"Tecnologías Digitales",semestre:3,area:"programacion",pre:[]},
+  {id:"ETICA",nombre:"Ética",semestre:3,area:"formacion",pre:[]},
+  {id:"GESTP",nombre:"Gestión Personal",semestre:3,area:"formacion",pre:[]},
 
-  { id: "EDO", nombre: "Ecuaciones Diferenciales", semestre: 4, area: "matematicas", prerequisitos: ["CALC2"] },
-  { id: "EST2", nombre: "Estadística Inferencial", semestre: 4, area: "matematicas", prerequisitos: ["EST1"] },
-  { id: "MICRO", nombre: "Microeconomía", semestre: 4, area: "economia", prerequisitos: [] },
-  { id: "ORG", nombre: "Comportamiento Organizacional", semestre: 4, area: "gestion", prerequisitos: [] },
+  // SEMESTRE 4
+  {id:"ED",nombre:"Ecuaciones Diferenciales",semestre:4,area:"mate",pre:["CALC3"]},
+  {id:"EYM",nombre:"Electricidad y Magnetismo",semestre:4,area:"fisica",pre:["FIS1"]},
+  {id:"PROB",nombre:"Probabilidad y Estadística",semestre:4,area:"mate",pre:["ALGLIN"]},
+  {id:"SUST",nombre:"Taller Sustentabilidad",semestre:4,area:"gestion",pre:[]},
+  {id:"ECON",nombre:"Economía",semestre:4,area:"gestion",pre:[]},
 
-  { id: "MACRO", nombre: "Macroeconomía", semestre: 5, area: "economia", prerequisitos: ["MICRO"] },
-  { id: "IO", nombre: "Investigación de Operaciones I", semestre: 5, area: "gestion", prerequisitos: ["CALC2"] },
-  { id: "FIN1", nombre: "Finanzas I", semestre: 5, area: "economia", prerequisitos: ["CONT"] },
+  // SEMESTRE 5
+  {id:"ESTADV",nombre:"Estadística Avanzada",semestre:5,area:"mate",pre:["PROB"]},
+  {id:"FENT",nombre:"Fenómenos Transporte",semestre:5,area:"fisica",pre:["ED"]},
+  {id:"INNOV",nombre:"Taller Innovación",semestre:5,area:"gestion",pre:[]},
+  {id:"CONT",nombre:"Contabilidad y Costos",semestre:5,area:"gestion",pre:[]},
+  {id:"OPT",nombre:"Optimización",semestre:5,area:"mate",pre:["ED"]},
+  {id:"PYS",nombre:"Persona y Sociedad",semestre:5,area:"formacion",pre:[]},
 
-  { id: "IO2", nombre: "Investigación de Operaciones II", semestre: 6, area: "gestion", prerequisitos: ["IO"] },
-  { id: "FIN2", nombre: "Finanzas II", semestre: 6, area: "economia", prerequisitos: ["FIN1"] },
-  { id: "LOG", nombre: "Logística", semestre: 6, area: "gestion", prerequisitos: [] },
-
-  { id: "PROD", nombre: "Gestión de Operaciones", semestre: 7, area: "gestion", prerequisitos: ["LOG"] },
-  { id: "RRHH", nombre: "Gestión de Personas", semestre: 7, area: "gestion", prerequisitos: [] },
-  { id: "MARK", nombre: "Marketing", semestre: 7, area: "economia", prerequisitos: [] },
-
-  { id: "PROY", nombre: "Evaluación de Proyectos", semestre: 8, area: "gestion", prerequisitos: ["FIN2"] },
-  { id: "CALIDAD", nombre: "Gestión de Calidad", semestre: 8, area: "gestion", prerequisitos: [] },
-
-  { id: "PROY1", nombre: "Proyecto de Ingeniería I", semestre: 9, area: "gestion", prerequisitos: ["PROY"] },
-  { id: "OPT1", nombre: "Optativo Profesional I", semestre: 9, area: "humanidades", prerequisitos: [] },
-
-  { id: "PROY2", nombre: "Proyecto de Ingeniería II", semestre: 10, area: "gestion", prerequisitos: ["PROY1"] },
-  { id: "OPT2", nombre: "Optativo Profesional II", semestre: 10, area: "humanidades", prerequisitos: [] }
+  // SEMESTRES 6–10 (sin prerequisitos estrictos para simplificar)
+  {id:"SIM",nombre:"Taller Simulación",semestre:7,area:"programacion",pre:["OPT"]},
+  {id:"LOG",nombre:"Gestión Logística",semestre:9,area:"gestion",pre:[]},
+  {id:"TIT",nombre:"Vía de Titulación",semestre:10,area:"gestion",pre:[]}
 ];
 
+const estado = JSON.parse(localStorage.getItem("estado")) || {};
 const malla = document.getElementById("malla");
-const progreso = document.getElementById("progreso");
-const toggleVista = document.getElementById("toggleVista");
 
-const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
-const notas = JSON.parse(localStorage.getItem("notas")) || {};
-
-toggleVista.onclick = () => {
-  malla.classList.toggle("horizontal");
-  malla.classList.toggle("vertical");
-};
-
-/* Confetti */
-function lanzarConfetti() {
-  const colores = ["#f4a7b9", "#cdb4db", "#a2d2ff", "#bde0fe", "#ffc8dd"];
-  for (let i = 0; i < 40; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    document.body.appendChild(c);
-    const size = Math.random() * 8 + 6;
-    c.style.width = size + "px";
-    c.style.height = size + "px";
-    c.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-    c.style.left = Math.random() * window.innerWidth + "px";
-    c.style.top = "-10px";
-    const dur = Math.random() * 2 + 2;
-    c.animate(
-      [{ transform: "translateY(0)" }, { transform: `translateY(${window.innerHeight + 100}px)` }],
-      { duration: dur * 1000 }
-    );
-    setTimeout(() => c.remove(), dur * 1000);
-  }
+function puedeCursar(ramo){
+  return ramo.pre.every(p => estado[p]?.aprobado);
 }
 
-/* Crear malla */
-function crearMalla() {
+function render(){
   malla.innerHTML = "";
-  const maxSemestre = Math.max(...ramos.map(r => r.semestre));
-
-  for (let s = 1; s <= maxSemestre; s++) {
+  for(let s=1;s<=10;s++){
     const col = document.createElement("div");
     col.className = "semestre";
     col.innerHTML = `<h2>Semestre ${s}</h2>`;
 
-    ramos.filter(r => r.semestre === s).forEach(ramo => {
+    ramos.filter(r=>r.semestre===s).forEach(r=>{
       const div = document.createElement("div");
-      div.className = `ramo area-${ramo.area}`;
+      div.classList.add("ramo", r.area);
 
-      const aprobado = estadoRamos[ramo.id];
-      const desbloqueado = ramo.prerequisitos.every(p => estadoRamos[p]);
-
-      if (aprobado) div.classList.add("aprobado");
-      if (!desbloqueado && !aprobado) div.classList.add("bloqueado");
-
-      div.innerHTML = `
-        <strong>${ramo.nombre}</strong>
-        ${notas[ramo.id] ? `<div class="nota">Nota: ${notas[ramo.id]}</div>` : ""}
-      `;
-
-      div.onclick = () => {
-        if (!desbloqueado && !aprobado) return;
-        if (!estadoRamos[ramo.id]) {
-          const nota = prompt("¿Con qué nota aprobaste?");
-          if (!nota) return;
-          estadoRamos[ramo.id] = true;
-          notas[ramo.id] = nota;
-          lanzarConfetti();
-        } else {
-          delete estadoRamos[ramo.id];
-          delete notas[ramo.id];
-        }
-        localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
-        localStorage.setItem("notas", JSON.stringify(notas));
-        crearMalla();
-      };
-
+      if(estado[r.id]?.aprobado){
+        div.classList.add("aprobado");
+        div.textContent = `${r.nombre} (${estado[r.id].nota})`;
+      } else if(puedeCursar(r)){
+        div.classList.add("disponible");
+        div.textContent = r.nombre;
+        div.onclick = ()=>{
+          const nota = prompt("Nota final:");
+          if(nota){
+            estado[r.id]={aprobado:true,nota};
+            localStorage.setItem("estado",JSON.stringify(estado));
+            lanzarConfetti();
+            render();
+          }
+        };
+      } else {
+        div.classList.add("bloqueado");
+        div.textContent = r.nombre;
+      }
       col.appendChild(div);
     });
-
     malla.appendChild(col);
   }
-
-  progreso.textContent = `Progreso: ${Object.keys(estadoRamos).length} / ${ramos.length} ramos aprobados`;
 }
 
-crearMalla();
+function lanzarConfetti(){
+  const c=document.getElementById("confetti");
+  const ctx=c.getContext("2d");
+  c.width=innerWidth;c.height=innerHeight;
+  let p=[...Array(120)].map(()=>({
+    x:Math.random()*c.width,
+    y:Math.random()*c.height,
+    r:Math.random()*6+4,
+    d:Math.random()*5+2
+  }));
+  let t=0;
+  (function anim(){
+    ctx.clearRect(0,0,c.width,c.height);
+    p.forEach(o=>{
+      ctx.fillStyle=`hsl(${Math.random()*360},80%,70%)`;
+      ctx.beginPath();
+      ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+      ctx.fill();
+      o.y+=o.d;
+    });
+    if(t++<60) requestAnimationFrame(anim);
+  })();
+}
+
+render();
