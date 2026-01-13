@@ -12,22 +12,47 @@ h1 {
 
 #progreso {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: bold;
   color: #4b4b6a;
 }
 
-/* Scroll horizontal */
+/* Botón */
+.controles {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f4a7b9;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Contenedor */
 #contenedor-malla {
-  overflow-x: auto;
+  overflow: auto;
   padding-bottom: 15px;
 }
 
-/* Malla */
-#malla {
+/* ===== MALLA ===== */
+#malla.horizontal {
   display: flex;
   gap: 20px;
   min-width: max-content;
+}
+
+#malla.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Semestres */
@@ -37,6 +62,10 @@ h1 {
   padding: 12px;
   width: 240px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+#malla.vertical .semestre {
+  width: 100%;
 }
 
 .semestre h2 {
