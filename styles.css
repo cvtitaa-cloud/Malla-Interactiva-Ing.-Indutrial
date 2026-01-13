@@ -1,140 +1,94 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #fdf6fb;
+  background: #f7f9fc;
   margin: 0;
   padding: 20px;
 }
 
 h1 {
   text-align: center;
-  color: #4b4b6a;
+  color: #4a6fa5;
+  margin-bottom: 20px;
 }
 
-#progreso {
-  text-align: center;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #4b4b6a;
+/* CONTENEDOR GENERAL */
+.contenedor-malla {
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
-/* Botón */
-.controles {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-button {
-  padding: 8px 18px;
-  border: none;
-  border-radius: 20px;
-  background-color: #f4a7b9;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Contenedor */
-#contenedor-malla {
-  overflow: auto;
-  padding-bottom: 15px;
-}
-
-/* ===== MALLA ===== */
-#malla.horizontal {
-  display: flex;
+/* MALLA */
+#malla {
+  display: grid;
+  grid-template-columns: repeat(10, 260px);
   gap: 20px;
-  min-width: max-content;
+  min-width: 2600px;
 }
 
-#malla.vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Semestres */
+/* SEMESTRE */
 .semestre {
-  background: white;
-  border-radius: 18px;
+  background: #ffffff;
+  border-radius: 16px;
   padding: 12px;
-  width: 240px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-}
-
-#malla.vertical .semestre {
-  width: 100%;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .semestre h2 {
   text-align: center;
-  font-size: 15px;
-  color: #6a6a8e;
+  color: #6b8ec6;
   margin-bottom: 10px;
 }
 
-/* Ramos */
+/* RAMOS */
 .ramo {
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 14px;
-  text-align: center;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
   cursor: pointer;
-  min-height: 60px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.ramo:hover:not(.bloqueado) {
-  transform: scale(1.05);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+/* ESTADOS */
+.disponible {
+  background: #bfe7f6;
+  color: #033e5b;
 }
 
-/* Áreas pastel */
-.area-matematicas { background: #e6d9ff; color: #4b3f72; }
-.area-fisica { background: #f2d6f5; color: #6a3d6f; }
-.area-programacion { background: #d9f2e6; color: #2f6f55; }
-.area-economia { background: #ffe1c9; color: #8a4b2f; }
-.area-gestion { background: #cfefff; color: #1f5f85; }
-.area-humanidades { background: #f8d7e8; color: #7a3f5c; }
-
-/* Estados */
-.ramo.bloqueado {
-  background: #e5e5ea !important;
-  color: #9a9a9a !important;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.ramo.aprobado {
-  filter: brightness(0.8);
-  text-decoration: line-through;
+.aprobado {
+  background: #6fb6d6;
   color: white;
-  animation: pop 0.35s ease;
+  text-decoration: line-through;
 }
 
-@keyframes pop {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+.bloqueado {
+  background: #d9d9d9;
+  color: #777;
+  cursor: not-allowed;
 }
 
-/* Nota */
-.nota {
-  font-size: 12px;
-  margin-top: 6px;
-  font-weight: bold;
+/* ÁREAS (colores girly suaves) */
+.mate { border-left: 6px solid #9ad0ec; }
+.programacion { border-left: 6px solid #b7b7f7; }
+.gestion { border-left: 6px solid #f7b7d2; }
+.formacion { border-left: 6px solid #ffd6a5; }
+.fisica { border-left: 6px solid #a0e7e5; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  #malla {
+    grid-template-columns: 1fr;
+    min-width: auto;
+  }
 }
 
-/* Confetti */
-.confetti {
+/* CONFETTI */
+#confetti {
   position: fixed;
-  border-radius: 50%;
-  z-index: 9999;
+  inset: 0;
+  pointer-events: none;
 }
