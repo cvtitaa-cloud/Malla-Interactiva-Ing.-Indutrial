@@ -1,94 +1,47 @@
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
 body {
-  background: #f7f9fc;
-  margin: 0;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f5f5f5;
 }
 
 h1 {
   text-align: center;
-  color: #4a6fa5;
-  margin-bottom: 20px;
 }
 
-/* CONTENEDOR GENERAL */
-.contenedor-malla {
-  overflow-x: auto;
-  padding-bottom: 20px;
-}
-
-/* MALLA */
 #malla {
-  display: grid;
-  grid-template-columns: repeat(10, 260px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  min-width: 2600px;
+  justify-content: center;
 }
 
-/* SEMESTRE */
 .semestre {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.semestre h2 {
-  text-align: center;
-  color: #6b8ec6;
-  margin-bottom: 10px;
-}
-
-/* RAMOS */
-.ramo {
+  background: #fff;
+  border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 12px;
-  margin-bottom: 8px;
+  width: 200px;
+}
+
+.ramo {
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
 }
 
-/* ESTADOS */
-.disponible {
-  background: #bfe7f6;
-  color: #033e5b;
-}
+.ramo.mate { background: #e0f7fa; }
+.ramo.programacion { background: #e8f5e9; }
+.ramo.gestion { background: #fff9c4; }
+.ramo.fisica { background: #f3e5f5; }
+.ramo.formacion { background: #ffe0b2; }
 
-.aprobado {
-  background: #6fb6d6;
-  color: white;
-  text-decoration: line-through;
-}
+.ramo.aprobado { background: #c8e6c9; }
+.ramo.disponible { border: 2px dashed #4caf50; }
+.ramo.bloqueado { background: #eeeeee; color: #999; cursor: not-allowed; }
 
-.bloqueado {
-  background: #d9d9d9;
-  color: #777;
-  cursor: not-allowed;
-}
-
-/* ÁREAS (colores girly suaves) */
-.mate { border-left: 6px solid #9ad0ec; }
-.programacion { border-left: 6px solid #b7b7f7; }
-.gestion { border-left: 6px solid #f7b7d2; }
-.formacion { border-left: 6px solid #ffd6a5; }
-.fisica { border-left: 6px solid #a0e7e5; }
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  #malla {
-    grid-template-columns: 1fr;
-    min-width: auto;
-  }
-}
-
-/* CONFETTI */
 #confetti {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   pointer-events: none;
 }
