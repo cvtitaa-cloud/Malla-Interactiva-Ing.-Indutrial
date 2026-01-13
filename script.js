@@ -36,7 +36,7 @@ const ramos = [
   {id:"OPT",nombre:"Optimización",semestre:5,area:"mate",pre:["ED"]},
   {id:"PYS",nombre:"Persona y Sociedad",semestre:5,area:"formacion",pre:[]},
 
-  // SEMESTRES 6–10 (sin prerequisitos estrictos para simplificar)
+  // SEMESTRES 6–10
   {id:"SIM",nombre:"Taller Simulación",semestre:7,area:"programacion",pre:["OPT"]},
   {id:"LOG",nombre:"Gestión Logística",semestre:9,area:"gestion",pre:[]},
   {id:"TIT",nombre:"Vía de Titulación",semestre:10,area:"gestion",pre:[]}
@@ -86,27 +86,36 @@ function render(){
 }
 
 function lanzarConfetti(){
-  const c=document.getElementById("confetti");
-  const ctx=c.getContext("2d");
-  c.width=innerWidth;c.height=innerHeight;
-  let p=[...Array(120)].map(()=>({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
-    r:Math.random()*6+4,
-    d:Math.random()*5+2
+  const c = document.getElementById("confetti");
+  const ctx = c.getContext("2d");
+  c.width = innerWidth;
+  c.height = innerHeight;
+
+  let p = [...Array(120)].map(() => ({
+    x: Math.random() * c.width,
+    y: -10,
+    r: Math.random() * 6 + 4,
+    d: Math.random() * 5 + 2
   }));
-  let t=0;
-  (function anim(){
+
+  let t = 0;
+  function anim(){
     ctx.clearRect(0,0,c.width,c.height);
     p.forEach(o=>{
-      ctx.fillStyle=`hsl(${Math.random()*360},80%,70%)`;
+      ctx.fillStyle = `hsl(${Math.random()*360},80%,70%)`;
       ctx.beginPath();
       ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
       ctx.fill();
-      o.y+=o.d;
+      o.y += o.d;
+      o.x += Math.sin(t/10) * 2; // zig-zag lateral
     });
-    if(t++<60) requestAnimationFrame(anim);
-  })();
+    if(t++ < 120){
+      requestAnimationFrame(anim);
+    } else {
+      ctx.clearRect(0,0,c.width,c.height);
+    }
+  }
+  anim();
 }
 
 render();
