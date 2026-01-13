@@ -1,37 +1,24 @@
 const ramos = [
-  // SEMESTRE 1
   { id: "CALC1", nombre: "Introducción al Cálculo", semestre: 1, area: "matematicas", prerequisitos: [] },
   { id: "ALG", nombre: "Álgebra", semestre: 1, area: "matematicas", prerequisitos: [] },
   { id: "PROG1", nombre: "Programación I", semestre: 1, area: "programacion", prerequisitos: [] },
 
-  // SEMESTRE 2
   { id: "CALC2", nombre: "Cálculo I", semestre: 2, area: "matematicas", prerequisitos: ["CALC1"] },
   { id: "FIS1", nombre: "Física I", semestre: 2, area: "fisica", prerequisitos: ["CALC1"] },
   { id: "PROG2", nombre: "Programación II", semestre: 2, area: "programacion", prerequisitos: ["PROG1"] },
 
-  // SEMESTRE 3
   { id: "CALC3", nombre: "Cálculo II", semestre: 3, area: "matematicas", prerequisitos: ["CALC2"] },
   { id: "FIS2", nombre: "Física II", semestre: 3, area: "fisica", prerequisitos: ["FIS1"] },
 
-  // SEMESTRE 4
   { id: "EDO", nombre: "Ecuaciones Diferenciales", semestre: 4, area: "matematicas", prerequisitos: ["CALC3"] },
 
-  // SEMESTRE 5
   { id: "ECO1", nombre: "Microeconomía", semestre: 5, area: "economia", prerequisitos: [] },
-
-  // SEMESTRE 6
   { id: "ECO2", nombre: "Macroeconomía", semestre: 6, area: "economia", prerequisitos: ["ECO1"] },
 
-  // SEMESTRE 7
   { id: "GEST1", nombre: "Gestión de Operaciones", semestre: 7, area: "gestion", prerequisitos: [] },
-
-  // SEMESTRE 8
   { id: "FIN", nombre: "Finanzas", semestre: 8, area: "economia", prerequisitos: [] },
 
-  // SEMESTRE 9
   { id: "PROY1", nombre: "Proyecto Industrial I", semestre: 9, area: "gestion", prerequisitos: [] },
-
-  // SEMESTRE 10
   { id: "PROY2", nombre: "Proyecto Industrial II", semestre: 10, area: "gestion", prerequisitos: ["PROY1"] }
 ];
 
@@ -41,10 +28,9 @@ const progreso = document.getElementById("progreso");
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 const notas = JSON.parse(localStorage.getItem("notas")) || {};
 
-/* ===== CONFETTI ===== */
+/* Confetti */
 function lanzarConfetti() {
   const colores = ["#f4a7b9", "#cdb4db", "#a2d2ff", "#bde0fe", "#ffc8dd"];
-
   for (let i = 0; i < 40; i++) {
     const c = document.createElement("div");
     c.className = "confetti";
@@ -58,7 +44,6 @@ function lanzarConfetti() {
     c.style.top = "-10px";
 
     const dur = Math.random() * 2 + 2;
-
     c.animate(
       [{ transform: "translateY(0)" }, { transform: `translateY(${window.innerHeight + 100}px)` }],
       { duration: dur * 1000, easing: "ease-out" }
@@ -68,10 +53,9 @@ function lanzarConfetti() {
   }
 }
 
-/* ===== MALLA ===== */
+/* Crear malla */
 function crearMalla() {
   malla.innerHTML = "";
-
   const maxSemestre = Math.max(...ramos.map(r => r.semestre));
 
   for (let s = 1; s <= maxSemestre; s++) {
@@ -119,7 +103,7 @@ function crearMalla() {
     malla.appendChild(col);
   }
 
-  progreso.textContent = `Progreso: ${Object.keys(estadoRamos).length} / ${ramos.length}`;
+  progreso.textContent = `Progreso: ${Object.keys(estadoRamos).length} / ${ramos.length} ramos aprobados`;
 }
 
 crearMalla();
